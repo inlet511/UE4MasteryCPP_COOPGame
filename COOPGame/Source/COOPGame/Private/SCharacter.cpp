@@ -32,11 +32,11 @@ void ASCharacter::BeginPlay()
 
 	FActorSpawnParameters SpawnParams;
 	SpawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
-	CurrentWeapon = GetWorld()->SpawnActor<AActor>(StartWeaponClass, FVector::ZeroVector, FRotator::ZeroRotator, SpawnParams);
+	CurrentWeapon = GetWorld()->SpawnActor<ASWeapon>(StartWeaponClass, FVector::ZeroVector, FRotator::ZeroRotator, SpawnParams);
 	if (CurrentWeapon)
 	{
 		CurrentWeapon->SetOwner(this);
-		CurrentWeapon->AttachToComponent(Mesh, FAttachmentTransformRules::SnapToTargetIncludingScale, WeaponAttachSocketName);
+		CurrentWeapon->AttachToComponent(GetMesh(), FAttachmentTransformRules::SnapToTargetIncludingScale, WeaponAttachSocketName);
 	}
 }
 
