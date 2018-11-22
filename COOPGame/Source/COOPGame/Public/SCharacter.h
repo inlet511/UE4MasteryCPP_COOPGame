@@ -10,6 +10,7 @@
 class UCameraComponent;
 class USpringArmComponent;
 class ASWeapon;
+class USHealthComponent;
 
 
 UCLASS()
@@ -54,6 +55,7 @@ protected:
 
 	void EndZoom();
 
+	UPROPERTY(Replicated)
 	ASWeapon* CurrentWeapon;
 
 	void StartFire();
@@ -65,6 +67,15 @@ protected:
 
 	UPROPERTY(VisibleDefaultsOnly, Category = "Player")
 	FName WeaponAttachSocketName;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category ="Components")
+	USHealthComponent* HealthComp;
+
+	UFUNCTION()
+	void OnHealthChanged(USHealthComponent*  OwningHealthComp, float  Health, float  HealthDelta, const class UDamageType*  DamageType, class AController*  InstigatedBy, AActor*  DamageCauser);
+
+	UPROPERTY(Replicated, BlueprintReadOnly, Category = "Player")
+	bool bDied;
 
 public:	
 	// Called every frame
